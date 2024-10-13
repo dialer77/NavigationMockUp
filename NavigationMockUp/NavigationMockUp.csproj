@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -83,7 +84,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
@@ -96,6 +97,44 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UC\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\buttonCharge.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\buttonDashBoard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\buttonMedia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\buttonMinus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\buttonMore.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\buttonNavigation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\buttonPhone.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\buttonPlus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\buttonQuickControls.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\buttonSettings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\titleBar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Background.mp4">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
