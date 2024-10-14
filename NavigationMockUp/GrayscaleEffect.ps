@@ -1,0 +1,9 @@
+sampler2D input : register(s0);
+float factor : register(c0);
+
+float4 main(float2 uv : TEXCOORD) : COLOR
+{
+    float4 color = tex2D(input, uv);
+    float gray = dot(color.rgb, float3(0.3, 0.59, 0.11));
+    return lerp(color, gray.xxxx, factor);
+}
