@@ -27,6 +27,7 @@ namespace NavigationMockUp
     public partial class MainWindow : Window
     {
         private DispatcherTimer timer;
+        private DispatcherTimer mapAutoHideTimer; // Timer for auto-hide
         private bool isMapVisible = false;
         private SoundPlayer clickSound;
         private bool isHandled = false;
@@ -36,6 +37,7 @@ namespace NavigationMockUp
             InitializeComponent();
             InitializeTimer();
             InitializeClickSound();
+            InitializeMapAutoHideTimer(); // Initialize the new timer
         }
 
         private void InitializeTimer()
@@ -60,6 +62,13 @@ namespace NavigationMockUp
             {
                 MessageBox.Show($"Click sound file not found at: {soundPath}", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+        }
+
+        private void InitializeMapAutoHideTimer()
+        {
+            mapAutoHideTimer = new DispatcherTimer();
+            mapAutoHideTimer.Interval = TimeSpan.FromSeconds(5);
+            mapAutoHideTimer.Tick += MapAutoHideTimer_Tick;
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -186,30 +195,38 @@ namespace NavigationMockUp
         {
             if (isHandled) return;
 
-            // 버튼이나 다른 컨트롤이 아닌 경우에만 맵 토글
+            // Show the map or reset the timer if it's already visible
             if (e.OriginalSource is Grid || e.OriginalSource is Border)
             {
-                ToggleMapVisibility();
+                ShowMap();
                 isHandled = true;
-                e.Handled = true; // 이벤트가 더 이상 전파되지 않도록 함
+                e.Handled = true; // Prevent further event propagation
             }
         }
 
-        private void ToggleMapVisibility()
+        private void MapAutoHideTimer_Tick(object sender, EventArgs e)
         {
             if (isMapVisible)
             {
                 FadeOut(mapBorder);
                 mapVideo.Pause();
+                isMapVisible = false;
             }
-            else
+            mapAutoHideTimer.Stop();
+        }
+
+        private void ShowMap()
+        {
+            if (!isMapVisible)
             {
                 mapBorder.Visibility = Visibility.Visible;
                 FadeIn(mapBorder);
                 mapVideo.Play();
+                isMapVisible = true;
             }
-
-            isMapVisible = !isMapVisible;
+            // Restart the timer whenever the map is shown or clicked again
+            mapAutoHideTimer.Stop();
+            mapAutoHideTimer.Start();
         }
 
         private void FadeIn(UIElement element)
